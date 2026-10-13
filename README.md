@@ -50,16 +50,22 @@ bun run typecheck  # builds first: tsc reads the generated route types
 - `src/styles/app.css` — Tailwind entry.
 - `src/routeTree.gen.ts` — generated from `src/routes/*` on dev and build
   (gitignored, so a fresh clone generates it on the first build).
-- `wrangler.jsonc` — Worker name, compatibility, bindings. `main` names
-  TanStack Start's server entry; the plugin resolves it.
+- `cloudflare.config.ts` — the Worker: name, compatibility, bindings, with the
+  typed helpers from `cf/config` instead of a `wrangler.jsonc`. `entrypoint`
+  names TanStack Start's server entry; the plugin resolves it.
+- `vite.config.ts` — loads `cloudflare.config.ts` and hands it to the
+  Cloudflare plugin (restart the dev server after editing the config).
 
 ## Bindings
 
-The template ships one commented D1 example; uncomment it for a per-app
-database, provisioned by the platform on first deploy:
+`cloudflare.config.ts` ships one commented D1 example; uncomment it (and import
+`bindings` from `cf/config`) for a per-app database, provisioned by the
+platform on first deploy:
 
-```jsonc
-"d1_databases": [{ "binding": "DB", "database_name": "app-db" }]
+```ts
+env: {
+  DB: bindings.d1({ name: "app-db" }),
+},
 ```
 
 Read bindings in a server function through `cloudflare:workers`:
@@ -69,7 +75,7 @@ import { env } from "cloudflare:workers";
 ```
 
 Secrets: set them as env vars on the app (Noite passes them to the build and
-the fleet), never in `wrangler.jsonc`.
+the fleet), never in `cloudflare.config.ts`.
 
 ## Stack
 
