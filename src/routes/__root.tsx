@@ -11,9 +11,12 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { content: "width=device-width, initial-scale=1", name: "viewport" },
-      { title: "TanStack Start on Noite" },
+      { title: "Noite · TanStack Start" },
     ],
-    links: [{ href: appCss, rel: "stylesheet" }],
+    links: [
+      { href: appCss, rel: "stylesheet" },
+      { href: "/favicon.svg", rel: "icon", type: "image/svg+xml" },
+    ],
   }),
   shellComponent: RootDocument,
 });

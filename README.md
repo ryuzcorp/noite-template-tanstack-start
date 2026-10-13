@@ -45,7 +45,7 @@ bun run typecheck  # builds first: tsc reads the generated route types
 ## Layout
 
 - `src/routes/__root.tsx` — the HTML document shell and root route.
-- `src/routes/index.tsx` — the home route, with a `createServerFn` loader.
+- `src/routes/index.tsx` — the home route: a live greeting and a button that calls a `createServerFn` in the Worker.
 - `src/router.tsx` — `getRouter()`, the Start router factory.
 - `src/styles/app.css` — Tailwind entry.
 - `src/routeTree.gen.ts` — generated from `src/routes/*` on dev and build
