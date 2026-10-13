@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "noite-tanstack-app",
+  "compatibility_date": "2026-01-01",
+  "compatibility_flags": ["nodejs_compat"],
+  // TanStack Start's Worker entry: the plugin resolves this specifier to the
+  // generated SSR bundle. `@cloudflare/vite-plugin` writes the build output
+  // beside `.wrangler/deploy/config.json`; Noite converts that for celld.
+  "main": "@tanstack/react-start/server-entry"
+  // Optional D1 example: add a `d1_databases` entry for an `env.DB` binding,
+  // provisioned per app on first deploy. Read it in a server function through
+  // `import { env } from "cloudflare:workers"` —
+  // "d1_databases": [{ "binding": "DB", "database_name": "app-db" }]
+}
